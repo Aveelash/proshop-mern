@@ -120,7 +120,8 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 //@route PUT /api/users
 //@access Private/Admin
 const getUsers = asyncHandler(async (req, res) => {
-  res.send("get users");
+  const users = await User.find({});
+  res.json(users);
 });
 
 //@desc Delete users
