@@ -25,7 +25,6 @@ const ProductEditScreen = () => {
   const {
     data: product,
     isLoading,
-    refetch,
     error,
   } = useGetProductDetailsQuery(productId);
 
@@ -124,7 +123,7 @@ const ProductEditScreen = () => {
                 type="text"
                 placeholder="Enter Image Url"
                 value={image}
-                onChange={(e) => setImage}
+                onChange={(e) => setImage(e.target.value)}
               ></Form.Control>
               <Form.Control
                 type="file"
@@ -132,6 +131,7 @@ const ProductEditScreen = () => {
                 onChange={uploadFileHandler}
               ></Form.Control>
             </Form.Group>
+            {loadingUpload && <Loader />}
 
             <Form.Group controlId="brand" className="my-2">
               <Form.Label>Brand</Form.Label>
