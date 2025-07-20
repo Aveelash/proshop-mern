@@ -14,29 +14,30 @@ const LoginScreen = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [login, { isLoading }] = useLoginMutation();
-
   const { userInfo } = useSelector((state) => state.auth);
 
-  const { search } = useLocation();
-  const sp = new URLSearchParams(search);
-  const redirect = sp.get("redirect") || "/";
+  // ✅ Correct way to get the redirect query param
+  const redirect = new URLSearchParams(location.search).get("redirect") || "/";
 
+  // ✅ If user is already logged in, redirect
   useEffect(() => {
     if (userInfo) {
-      navigate(redirect);
+      navigate(redirect); // Example: /shipping
     }
   }, [userInfo, redirect, navigate]);
 
+  // ✅ Handle form submit
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
       const res = await login({ email, password }).unwrap();
-      dispatch(setCredentials({ ...res }));
-      navigate(redirect);
+      dispatch(setCredentials(res)); // Save user to Redux
+      navigate(redirect); // Go to redirect page
     } catch (err) {
-      toast.error(err?.data?.message || err.error);
+      toast.error(err?.data?.message || err?.error || "Login failed");
     }
   };
 
@@ -79,7 +80,7 @@ const LoginScreen = () => {
 
       <Row className="py-3">
         <Col>
-          New Customer ?{" "}
+          New Customer?{" "}
           <Link to={redirect ? `/register?redirect=${redirect}` : "/register"}>
             Register
           </Link>
