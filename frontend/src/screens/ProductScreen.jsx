@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import {
@@ -19,7 +19,6 @@ import {
 } from "../slices/productApiSlice.js";
 import Loader from "../components/Loader.jsx";
 import Message from "../components/Message.jsx";
-import Meta from "../components/Meta.jsx";
 import { addToCart } from "../slices/cartSlice.js";
 
 const ProductScreen = () => {
@@ -44,6 +43,14 @@ const ProductScreen = () => {
     useCreateReviewMutation();
 
   const { userInfo } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (product?.name) {
+      document.title = `${product.name} | ProShop`;
+    } else {
+      document.title = "Loading... | ProShop";
+    }
+  }, [product]);
 
   const addToCartHandler = () => {
     dispatch(addToCart({ ...product, qty }));
@@ -81,7 +88,6 @@ const ProductScreen = () => {
         </Message>
       ) : (
         <>
-          <Meta title={product.name} />
           <Row>
             <Col md={5}>
               <Image src={product.image} alt={product.name} fluid />
