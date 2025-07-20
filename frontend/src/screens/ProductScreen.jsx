@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import {
@@ -43,14 +43,6 @@ const ProductScreen = () => {
     useCreateReviewMutation();
 
   const { userInfo } = useSelector((state) => state.auth);
-
-  useEffect(() => {
-    if (product?.name) {
-      document.title = `${product.name} | ProShop`;
-    } else {
-      document.title = "Loading... | ProShop";
-    }
-  }, [product]);
 
   const addToCartHandler = () => {
     dispatch(addToCart({ ...product, qty }));
