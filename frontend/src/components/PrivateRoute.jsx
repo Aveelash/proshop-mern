@@ -1,4 +1,4 @@
-import { Outlet, Navigate, useLocation } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const PrivateRoute = () => {
@@ -8,7 +8,7 @@ const PrivateRoute = () => {
   return userInfo ? (
     <Outlet />
   ) : (
-    <Navigate to={`/login?redirect=${location.pathname}`} replace />
+    <Navigate to="/login" state={{ from: location }} replace />
   );
 };
 
