@@ -10,23 +10,23 @@ function addDecimals(num) {
 export function calcPrices(orderItems) {
   // Calculate the items price in whole number (pennies) to avoid issues with
   // floating point number calculations
-  const itemsPrice = orderItems.reduce(
+  const itemPrice = orderItems.reduce(
     (acc, item) => acc + (item.price * 100 * item.qty) / 100,
     0
   );
 
   // Calculate the shipping price
-  const shippingPrice = itemsPrice > 100 ? 0 : 10;
+  const shippingPrice = itemPrice > 100 ? 0 : 10;
 
   // Calculate the tax price
-  const taxPrice = 0.15 * itemsPrice;
+  const taxPrice = 0.15 * itemPrice;
 
   // Calculate the total price
-  const totalPrice = itemsPrice + shippingPrice + taxPrice;
+  const totalPrice = itemPrice + shippingPrice + taxPrice;
 
   // return prices as strings fixed to 2 decimal places
   return {
-    itemsPrice: addDecimals(itemsPrice),
+    itemPrice: addDecimals(itemPrice),
     shippingPrice: addDecimals(shippingPrice),
     taxPrice: addDecimals(taxPrice),
     totalPrice: addDecimals(totalPrice),
