@@ -183,7 +183,7 @@ const OrderScreen = () => {
                 <Row>
                   <Col>Items</Col>
                   <Col>
-                    {Number(order?.itemPrice ?? 0).toLocaleString("en-US", {
+                    {Number(order?.itemsPrice ?? 0).toLocaleString("en-US", {
                       style: "currency",
                       currency: "USD",
                     })}
