@@ -192,17 +192,32 @@ const OrderScreen = () => {
 
                 <Row>
                   <Col>Shipping</Col>
-                  <Col>${order.shippingPrice}</Col>
+                  <Col>
+                    {Number(order?.shippingPrice ?? 0).toLocaleString("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                    })}
+                  </Col>
                 </Row>
 
                 <Row>
                   <Col>Tax</Col>
-                  <Col>${order.taxPrice}</Col>
+                  <Col>
+                    {Number(order?.taxPrice ?? 0).toLocaleString("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                    })}
+                  </Col>
                 </Row>
 
                 <Row>
                   <Col>Total</Col>
-                  <Col>${order.totalPrice}</Col>
+                  <Col>
+                    {Number(order?.totalPrice ?? 0).toLocaleString("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                    })}
+                  </Col>
                 </Row>
               </ListGroup.Item>
 
