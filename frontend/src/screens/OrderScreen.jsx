@@ -182,7 +182,12 @@ const OrderScreen = () => {
               <ListGroup.Item>
                 <Row>
                   <Col>Items</Col>
-                  <Col>${order.itemsPrice}</Col>
+                  <Col>
+                    {Number(order?.itemsPrice ?? 0).toLocaleString("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                    })}
+                  </Col>
                 </Row>
 
                 <Row>
