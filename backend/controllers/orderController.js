@@ -29,10 +29,11 @@ const addOrderItems = asyncHandler(async (req, res) => {
     }
 
     return {
-      ...itemFromClient,
       product: itemFromClient._id,
+      name: matchingItemFromDB.name,
+      image: matchingItemFromDB.image,
       price: matchingItemFromDB.price,
-      _id: undefined, // prevent confusion with MongoDB _id
+      qty: Number(itemFromClient.qty),
     };
   });
 
